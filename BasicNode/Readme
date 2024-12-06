@@ -1,0 +1,70 @@
+# File Handling in Node.js
+
+The `fs` (File System) module in Node.js is used for file operations like reading, writing, and appending files. Below are some common operations with examples.
+
+---
+
+## Prerequisite
+
+Ensure that the `fs` module is required in your code:
+```javascript
+const fs = require('fs');
+
+1. Writing to a File
+
+Synchronous Writing
+Writes data to a file and blocks further execution until the operation completes.
+
+fs.writeFileSync('./test.txt', 'Hey how are you');
+Asynchronous Writing
+Writes data to a file without blocking execution.
+
+fs.writeFile('./test.txt', 'Hello world async', (err) => {
+  if (err) console.error(err);
+});
+
+2. Reading from a File
+
+Synchronous Reading
+Reads file content and blocks execution until the operation completes.
+
+const result = fs.readFileSync('./contact.txt', 'utf-8');
+console.log(result);
+
+##Asynchronous Reading
+Reads file content without blocking execution.
+```
+fs.readFile('./contact.txt', 'utf-8', (err, result) => {
+  if (err) {
+    console.error('Error:', err);
+  } else {
+    console.log(result);
+  }
+});
+```
+
+3. Appending to a File
+
+Synchronous Appending
+Appends data to an existing file, blocking further execution until completed.
+
+fs.appendFileSync('./test.txt', 'Hey brother\n');
+Asynchronous Appending
+Appends data without blocking execution.
+
+fs.appendFile('./test.txt', 'Async append data\n', (err) => {
+  if (err) console.error(err);
+});
+
+#Notes
+
+```
+Synchronous Methods block further code execution until the file operation completes.
+Asynchronous Methods execute file operations without blocking the execution of subsequent code.
+Always handle errors when using file operations to avoid unexpected crashes.
+Additional Example
+```
+
+Appending the current timestamp to a file:
+
+fs.appendFileSync('./test.txt', `${new Date().toLocaleString()}\n`);
