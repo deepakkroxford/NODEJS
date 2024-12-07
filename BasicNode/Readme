@@ -33,7 +33,7 @@ console.log(result);
 
 ##Asynchronous Reading
 Reads file content without blocking execution.
-```
+
 fs.readFile('./contact.txt', 'utf-8', (err, result) => {
   if (err) {
     console.error('Error:', err);
@@ -41,7 +41,7 @@ fs.readFile('./contact.txt', 'utf-8', (err, result) => {
     console.log(result);
   }
 });
-```
+
 
 3. Appending to a File
 
@@ -58,12 +58,12 @@ fs.appendFile('./test.txt', 'Async append data\n', (err) => {
 
 #Notes
 
-```
+
 Synchronous Methods block further code execution until the file operation completes.
 Asynchronous Methods execute file operations without blocking the execution of subsequent code.
 Always handle errors when using file operations to avoid unexpected crashes.
 Additional Example
-```
+
 
 Appending the current timestamp to a file:
 
