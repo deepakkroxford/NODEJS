@@ -1,0 +1,8 @@
+How DNS Works?
+
+sol:- Dns stand on domain name system.
+
+Other use of NODEJS
+
+Real time application :Efficintly manages real-time data application, such as chat apps
+and live updates using websockets
