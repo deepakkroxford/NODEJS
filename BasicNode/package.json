@@ -4,9 +4,13 @@
   "main": "hello.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": " hello.js"
+    "start": "node hello.js",
+    "server": "nodemon hello.js"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.0"
+  }
 }
