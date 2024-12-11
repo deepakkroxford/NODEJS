@@ -23,3 +23,13 @@ How to Start REPL:
 Open a terminal or command prompt.
 Type node and press Enter.
 You’ll see a prompt (>) indicating the REPL environment is active.
+
+
+# What is URL?
+
+Sol:- The URL stand for the uniform source locator.
+exmaple : https://github.com/
+
+https:-> protocal is the first name of the url
+github.com -> It is the domain name and it is the second part of the url.
+Queryparameter : It is the extra information that we can pass to the server.
