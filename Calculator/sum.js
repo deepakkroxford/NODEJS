@@ -1,37 +1,29 @@
-const { URLSearchParams } = require("url");
+const sumRequestHandler = (req, res) => {
+    console.log("In Sum Request Handler", req.url);
+    const body = [];
+    req.on('data', chunk =>{
+        body.push(chunk)
+        console.log(`Received data: ${chunk}`);  // You can log this to debug the incoming request data.  // In this case, it will log the form data received.  // You can parse it to extract the numbers.  // For example, if form data is "num1=5&num2=10", you can extract num1 and num2 as 5 and 10.  // Then you can add them together.  // Finally, you
+    });
 
-const sumrequesthandler = (req,res)=>{
-        console.log("In sum request handler",req.url);
-        // now we need those two number to do the sum operations
-        const body=[];
-        req.on('data',chunk =>{
-            body.push(chunk);
-            console.log(`Received data: ${chunk}`);
-        })
-        req.on('end',()=>{
-         const bodyStr=Buffer.concat(body).toString();
-         console.log(bodyStr);  // { first: '10', second: '20' }  // assuming the form fields are named as 'first' and'second'
-         const params = new URLSearchParams(bodyStr);
-         console.log(params);  // URLSearchParams { first: '10', second: '20' }  // assuming the form fields are named as 'first' and'second'
-         const bodyObj = Object.fromEntries(params);
-         console.log(bodyObj);  
-
-         const firstNum = parseInt(bodyObj.first, 10);
-         const secondNum = parseInt(bodyObj.second, 10);
-         const result = firstNum+secondNum;
-            console.log(`The sum is ${result}`);    
-            
-            res.setHeader('Content-Type', 'text/html');
-            res.write(`<html>
-                <body>
-                    <h1>The sum is ${result}</h1>
-                </body>
-                </html>`);
-            res.end();
-        })
-
-        
-      
-}
-
-exports.sumrequesthandler = sumrequesthandler;
+    req.on('end', () => {
+      const bodyStr = Buffer.concat(body).toString();
+      const params = new URLSearchParams(bodyStr);
+      const bodyObj = Object.fromEntries(params);
+      const result = Number(bodyObj.first) + Number(bodyObj.second);
+      console.log(result);
+      res.setHeader('Content-Type', 'text/html');
+      res.write(`
+        <html>
+          <head><title>Practise Set</title></head>
+          <body>
+            <h1>Your Sum is ${result}</h1>
+          </body>  
+        <html>  
+      `); 
+      return res.end();
+    });  
+  }
+  
+  const _sumRequestHandler = sumRequestHandler;
+export { _sumRequestHandler as sumRequestHandler };

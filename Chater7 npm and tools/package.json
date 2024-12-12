@@ -1,0 +1,15 @@
+{
+  "name": "chater7-npm-and-tools",
+  "version": "1.0.0",
+  "description": "Learnign how to crate the project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "Deepak Kumar Singh",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

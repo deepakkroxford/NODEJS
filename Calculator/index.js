@@ -40,8 +40,8 @@ const server = http.createServer((req, res) => {
     res.end();
 })
 
-server.listen(8001, () => {
-    console.log("server started on http://localhost:8001");
+server.listen(8000, () => {
+    console.log("server started on http://localhost:8000");
 });
 
 
