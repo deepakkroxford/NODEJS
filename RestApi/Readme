@@ -1,0 +1,15 @@
+
+
+The line app.use(express.json()); in an Express.js application enables middleware that parses incoming JSON request payloads and makes the parsed data accessible in req.body. Here's an explanation of what it does and why it's necessary:
+
+What express.json() Does
+Middleware:
+
+It is a built-in middleware function in Express that parses JSON data in the body of incoming HTTP requests.
+The parsed JSON object is then attached to the req.body property.
+Parsing JSON:
+
+When a client sends a request with a Content-Type of application/json and includes a JSON payload, this middleware processes that payload and converts it into a JavaScript object.
+Automatic Handling:
+
+Without this middleware, req.body will be undefined for JSON payloads because Express does not parse the request body by default.
