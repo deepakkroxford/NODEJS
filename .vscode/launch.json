@@ -4,7 +4,20 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
+        {
+            "type": "java",
+            "name": "Solving",
+            "request": "launch",
+            "mainClass": "Solving",
+            "projectName": "NODEJS_b8f66bc"
+        },
+        {
+            "type": "java",
+            "name": "solving",
+            "request": "launch",
+            "mainClass": "solving",
+            "projectName": "NODEJS_b8f66bc"
+        },
         {
             "type": "node",
             "request": "launch",
