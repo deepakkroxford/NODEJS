@@ -1,0 +1,6 @@
+What is middleware?
+sol :used /explain (rerun without)
+Middleware is software that acts as a bridge between different applications or services, allowing them to communicate and work together.
+
+Real-life example: Imagine you are at a restaurant. You (the client) place an order with the waiter (middleware). The waiter takes your order to the kitchen (server), where the chef prepares your food. Once the food is ready, the waiter brings it back to you. In this scenario, the waiter is the middleware, facilitating communication and coordination between you and the kitchen.
+
