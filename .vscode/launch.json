@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "aman",
+            "request": "launch",
+            "mainClass": "aman",
+            "projectName": "NODEJS_b8f66bc"
+        },
+        {
+            "type": "java",
             "name": "Solving",
             "request": "launch",
             "mainClass": "Solving",

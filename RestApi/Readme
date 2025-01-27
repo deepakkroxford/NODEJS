@@ -13,3 +13,27 @@ When a client sends a request with a Content-Type of application/json and includ
 Automatic Handling:
 
 Without this middleware, req.body will be undefined for JSON payloads because Express does not parse the request body by default.
+
+
+## What is RestApi and how is it different from a normal API?
+
+### REST API (Representational State Transfer API):
+
+- REST is an architectural style for designing networked applications.
+- It relies on a stateless, client-server, cacheable communications protocol -- the HTTP.
+- In RESTful applications, resources are identified by URLs, and actions are performed using standard HTTP methods (GET, POST, PUT, DELETE).
+- REST APIs are designed to be simple, scalable, and flexible, making them suitable for a wide range of applications.
+
+### Normal API:
+
+- The term "normal API" is quite broad and can refer to any type of API (Application Programming Interface) that allows software applications to communicate with each other.
+- APIs can be based on various protocols and architectures, such as SOAP, GraphQL, gRPC, etc.
+- Unlike REST APIs, other types of APIs may not follow the REST principles and can have different ways of handling requests and responses.
+
+### Key Differences:
+
+- REST APIs use standard HTTP methods and status codes, while other APIs may use different protocols and methods.
+- REST APIs are stateless, meaning each request from a client contains all the information needed to process the request,
+   whereas other APIs may maintain state between requests.
+- REST APIs use URLs to identify resources, while other APIs may use different mechanisms for resource identification.
+

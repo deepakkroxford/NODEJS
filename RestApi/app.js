@@ -1,64 +1,98 @@
 const express = require('express')
 const users = require('./MOCK_DATA.json')
+const fs = require('fs')
 const app = express()
 
+app.use(express.urlencoded({ extended: false }));
+
 app.get('/users', (req, res) => {
-    return res.json(users)
+
+    const html = `
+        <ul>
+            ${users.map(user => `<li>${user.first_name}</li> <li>${user.id}</li>`).join('')}
+        </ul>
+    `;
+    res.send(html);
 })
 
-app.get('/api/users/:id', (req, res) => {
-    const user = users.find(u => u.id === parseInt(req.params.id))
-    if (!user) return res.status(404).send('User not found')
-    return res.json(user)
+app.get('/api/user', (req, res) => {
+    res.json(users);
 })
 
-//using this i can feth the user by their id
-app.get('/users/:id', (req, res) => {
-    const user = users.find(u => u.id === parseInt(req.params.id))
-    if (!user) return res.status(404).send('User not found')
-    res.send(`<h1>User: ${JSON.stringify(user.first_name)}</h1>
-    <p>Age: ${user.gender}</p>
-    <p>Email: ${user.email}</p>`)
-})
+// find the user based on their id 
+app.get('/api/user/:id', (req, res) => {
+    const id = Number(req.params.id); // Convert the id from string to number
+    const user = users.find(user => user.id === id); // Find user by ID
 
-app.post('/users/:id', (req, res) => {
+    if (user) {
+        res.json(user); // Send the user as JSON if found
+    } else {
+        res.status(404).json({ message: "User not found" }); // Handle case where user is not found
+    }
+});
 
-    //in this route we create a new user with the firstname last name , email ,gender, job
+//find user by their job id 
+app.get('/api/user/:job', (req, res) => {
+    const jobtitle = req.params.job;
+    console.log('Received job title:', jobtitle);
+    const user = users.find(user => user['job-tile'] === jobtitle);
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(404).json({ message: 'User not found' });
+    }
+});
 
-
-
-})
-
-/*
-using this i can delete the existing user if they are available
-
-*/
-app.delete('/users/:id', (req, res) => {
-    const index = users.findIndex(u => u.id === parseInt(req.params.id))
-    if (index === -1) return res.status(404).send('User not found')
-    users.splice(index, 1)
-    res.send(`User with id ${req.params.id} has been deleted`)
-})
-
-app.use(express.json());
-
-//using this i can update the existing users
-app.patch('/users/:id', (req, res) => {
-    const user = users.find(u => u.id === parseInt(req.params.id))
-    if (!user) return res.status(404).send('User not found')
-
-    if (req.body.first_name) user.first_name = req.body.first_name
-    if (req.body.last_name) user.last_name = req.body.last_name
-    if (req.body.email) user.email = req.body.email
-    if (req.body.gender) user.gender = req.body.gender
-    if (req.body.job) user.job = req.body.job
-
-    res.send(`User with id ${req.params.id} has been updated`)
+// we have to add one middleware to see the upcoming request form the server so we use middleware 
+// that i added in the line number 9 
+app.post('/api/user', (req, res) => {
+    // what ever the data send by the user that is availble in the req.body
+    const body = req.body;
+    console.log("Body", body);
+    if (!body.first_name || !body.last_name || !body.email || !body.gender || body.job - tile) {
+        res.status(404).json({ message: 'enter all the details' });
+    }
+    users.push({ ...body, id: users.length + 1 })
+    fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err, data) => {
+        if (err) throw err;
+        console.log('User has been saved!');
+        res.json({ status: 'User saved successfully', id: users.length });
+    });
 })
 
 
-const port = process.env.PORT || 3000;
+// delete the user by id 
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`)
+
+app.delete('/api/user/:id', (req, res) => {
+    const id = Number(req.params.id); // Get user ID from URL parameter
+
+    // Read the MOCK_DATA.json file
+    fs.readFile('./MOCK_DATA.json', 'utf-8', (err, data) => {
+        if (err) return res.status(500).json({ message: 'Error reading file' });
+        const users = JSON.parse(data); // Parse the JSON data
+        const updatedUsers = users.filter(user => user.id !== id); // so those who not equal to given id  that reamin in data and thoes data equal to given id filter out 
+
+        // If no users were found after filtering, return not found
+        // if no user is filter out it menns updated user and old user length will be same so it mens user not found 
+        if (users.length === updatedUsers.length) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Write the updated data back to the file
+        fs.writeFile('./MOCK_DATA.json', JSON.stringify(updatedUsers, null, 2), (err) => {
+            if (err) return res.status(500).json({ message: 'Error writing to file' });
+            res.status(200).json({ message: 'User deleted successfully' });
+        });
+    });
+});
+
+
+
+
+
+//creating the server 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 })
