@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Displaying the data using the EJS template and understanding Server-Side Rendering</h1>
+
+    <h3>List of Data:</h3>
+    <ul>
+        <% datas.forEach((element) => { %>
+            <li> <%= element.shortId %> : <%= element.redirectUrl %>  </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

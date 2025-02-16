@@ -17,7 +17,10 @@ const handleGenerateShortUrl = async (req, res) => {
 
    });
    console.log("this is the short id i generate ",shortID)
-   return res.json({id:shortID})
+//    return res.json({id:shortID}) before we are returning the json object but now we are returning the html
+   return res.render('home',{
+    id:shortID,
+   })
    
 }
 

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { redirect } = require('react-router-dom');
+ 
 
 const ShortUrlSchema = new mongoose.Schema({
     shortId :{
