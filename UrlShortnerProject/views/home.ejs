@@ -1,22 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJS URL Shortener</title>
     <style>
         body {
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
         }
+
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #555;
+        }
+
     </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EJS</title>
 </head>
 
 <body>
     <h1>Learning Server-Side Rendering using EJS</h1>
 
     <% if (locals.id) { %>
-        <p>Url generated: http://localhost:9000/url/<%= locals.id %></p>
+        <p class="message">URL Generated: 
+            <a href="https://localhost:9000/url/<%= locals.id %>" target="_blank">http://localhost:9000/url/<%= locals.id %></a>
+        </p>
     <% } %>
 
     <div>
@@ -28,7 +110,7 @@
     </div>
 
     <div>
-        <% if (locals.urls) { %>
+        <% if (locals.urls && locals.urls.length > 0) { %>
             <table>
                 <thead>
                     <tr>
@@ -39,7 +121,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%urls.forEach((url, index) => { %>
+                    <% urls.forEach((url, index) => { %>
                         <tr>
                             <td><%= index + 1 %></td>
                             <td><%= url.shortId %></td>
@@ -50,7 +132,7 @@
                 </tbody>
             </table>
         <% } else { %>
-            <p>No URLs found.</p>
+            <p class="message">No URLs found.</p>
         <% } %>
     </div>
 </body>

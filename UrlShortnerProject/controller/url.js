@@ -13,8 +13,7 @@ const handleGenerateShortUrl = async (req, res) => {
          shortId: shortID,
          redirectUrl:body.url,
          totalClicks:[],
-         
-
+         createdBy:req.user._id,
    });
    console.log("this is the short id i generate ",shortID)
 //    return res.json({id:shortID}) before we are returning the json object but now we are returning the html
@@ -39,7 +38,7 @@ const getByUrl = async(req,res)=>{
     
     })
 
-    res.redirect(url.redirectUrl)
+    res.redirect('home')
 }
 
 const handleGetAnalytcs = async(req,res)=>{
