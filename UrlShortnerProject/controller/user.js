@@ -1,5 +1,5 @@
 const USER = require('../models/user');
-const { v4: uuidv4 } = require('uuid');
+// const { v4: uuidv4 } = require('uuid');
 const {setUser,getUser} = require('../service/auth');
 
 const handleUserCreation = async(req,res)=>{
@@ -32,10 +32,10 @@ const handleUserLogin = async(req,res)=>{
                 error:"Invalid username or password"
             });
         }
-        const sessionid = uuidv4();
-        setUser(sessionid,user); // this line will store the session id and user data in the map for future reference.
-        res.cookie('uid',sessionid);
-        console.log("this is my session id that i will genrate after the complete succesful user login",sessionid);
+
+        const token = setUser(user);
+        res.cookie('uid',token);
+        console.log("this is my token that i will genrate after the complete succesful user login",token);
         return res.redirect('/');
     }
     catch(error){

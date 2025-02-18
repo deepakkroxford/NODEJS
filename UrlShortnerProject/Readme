@@ -1,0 +1,33 @@
+
+
+Statefull Authentication:
+So in the Statefull Authentication we save the sate information on the server . so the mazor drawback of the staefull is when we restart the server our session will change and all user will 
+logout . so for that reason we use the stateless authentication we use the jwt token .
+
+
+
+authentication using the session id 
+
+const handleUserLogin = async(req,res)=>{
+    const {email,password} =req.body;
+    try{
+        const user = await USER.findOne({email,password});
+        if(!user){
+            return res.redirect('/login?error=Invalid+username+or+password',{
+                error:"Invalid username or password"
+            });
+        }
+
+        // w
+        const sessionid = uuidv4(); // the session id will change when we restart the server and this is the drawback of statefull authentication
+        setUser(sessionid,user); // this line will store the session id and user data in the map for future reference.
+        res.cookie('uid',sessionid);
+        console.log("this is my session id that i will genrate after the complete succesful user login",sessionid);
+        return res.redirect('/');
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).json({message: 'Server error'});
+    }   
+    
+}
