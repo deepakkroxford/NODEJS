@@ -9,6 +9,7 @@ if(!fs.existsSync(dataFolder)) {
 }
 
 const filepath = path.join(dataFolder, 'example.txt');
+console.log("File path :-> ", filepath);
 
 fs.writeFileSync(filepath, 'Hello from node js');
 console.log("File created");
@@ -60,7 +61,7 @@ fs.readFile(asyncCreation, 'utf-8', (err, data) => {
 
 
 /*
-async way to create a new folder
+    async way to create a new folder name middleware previously we created using the sync method
 */
 
 const newFolder = path.join(__dirname,'middleware');

@@ -1,5 +1,3 @@
-const { rejects } = require("assert");
-const { resolve } = require("path");
 
 function delay(time){
     return new Promise((resolve,rejects)=>{

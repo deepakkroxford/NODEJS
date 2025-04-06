@@ -62,8 +62,6 @@ app.post('/api/user', (req, res) => {
 
 
 // delete the user by id 
-
-
 app.delete('/api/user/:id', (req, res) => {
     const id = Number(req.params.id); // Get user ID from URL parameter
 
