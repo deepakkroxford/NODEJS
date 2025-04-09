@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curd Application</title>
+    <link rel="stylesheet" href="/stylesheert">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="w-full h-full min-h-screen bg-zinc-900 p-10 text-white">
+        <div class="nav mb-10">
+            <a class="text-blue-500" href="/user/read">Read Users</a>
+        </div>
+        <h1 class="text-4xl p-2">Update Users</h1>
+        <form action="/user/update/<%=userData._id%>" method="post">
+            <input class="px-5 py-3 m-5 bg-transparent border-2 border-zinc-800 outline-none" type="text"
+                placeholder="Name" name="name" value="<%= userData.name %>" />
+            <input class="px-5 py-3 m-5 bg-transparent border-2 border-zinc-800 outline-none" type="text"
+                placeholder="Email" name="email" value="<%= userData.email %>" />
+            <input class="px-5 py-3 m-5 bg-transparent border-2 border-zinc-800 outline-none" type="text"
+                placeholder="Image URL" name="url" value="<%= userData.url %>" />
+            <input class="px-5 py-2 m-5 bg-blue-500 hover:bg-yellow-600 text-black rounded-lg cursor-pointer"
+                type="submit" value="Update User" />
+        </form>
+    </div>
+</body>
+
+</html>
