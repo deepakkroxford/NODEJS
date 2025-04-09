@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curd Application</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="w-full h-full min-h-screen bg-zinc-900 p-10 text-white">
+    <div class="nav mb-10">
+        <a class="text-blue-500" href="/">back to home</a>
+    </div>
+
+    <h1 class="text-4xl p-2">All Users</h1>
+    <div class="users flex gap-3 flex-wrap">
+
+      <% if(data.length > 0){ %>
+        <% data.forEach((val) => { %>
+          <div class="users max-w-72 p-4 bg-zinc-800 rounded-lg">
+              <div class="w-full h-72 rounded-lg bg-red-500">
+                <img src="<%=val.url%>" alt="" class="w-full h-full object-cover rounded-lg">
+              </div>
+              <h3 class="text-xl tracking-tighter">
+                  <%= val.name %>
+              </h3>
+              <h5 class="text-zinc-500"><%= val.email %></h5>
+              <div class="flex gap-5 mt-10">
+                  <a class="text-zinc-200" href="/user/update/<%=val._id%>">Edit User</a>
+                  <a class="text-red-500" href="/user/delete/<%=val._id%>">Delete User</a>
+              </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <h1>No users present</h1>
+      <% } %>
+        
+    </div>
+  </div>
+</body>
+
+</html>
